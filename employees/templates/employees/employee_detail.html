@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Employee Details</h2>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">{{ employee.first_name }} {{ employee.last_name }}</h5>
+            <p class="card-text">
+                <strong>Email:</strong> {{ employee.email }}<br>
+                <strong>Department:</strong> {{ employee.get_department_display }}<br>
+                <strong>Hire Date:</strong> {{ employee.hire_date }}<br>
+                <strong>Salary:</strong> ${{ employee.salary }}<br>
+                <strong>Status:</strong> {% if employee.is_active %}Active{% else %}Inactive{% endif %}
+            </p>
+            <a href="{% url 'employee_list' %}" class="btn btn-primary">Back to List</a>
+        </div>
+    </div>
+</div>
+{% endblock %} 

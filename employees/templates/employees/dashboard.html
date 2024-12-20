@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid p-0">
+    <!-- Logo Section -->
+    <div class="bg-dark text-white p-3">
+        <h3>Logo</h3>
+    </div>
+
+    <!-- Navigation Bar -->
+    <div class="nav-wrapper bg-light p-2 border-bottom">
+        <div class="d-flex justify-content-between align-items-center">
+            <div style="width: 200px;"></div>
+            <div class="nav-links">
+                <a href="{% url 'dashboard' %}" class="text-decoration-none text-dark me-5">Home</a>
+                <a href="{% url 'employee_list' %}" class="text-decoration-none text-dark">Employee List</a>
+            </div>
+            <div style="width: 200px; text-align: right;">
+                <span class="me-2">{{ request.user.username }} -</span>
+                <a href="{% url 'logout' %}" class="text-decoration-none text-danger">Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard Header -->
+    <div class="bg-warning p-2">
+        <h4 class="m-0">DashBord</h4>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content-wrapper d-flex justify-content-center">
+        <h2 class="mt-5">Welcome Admin Panel</h2>
+    </div>
+</div>
+
+<style>
+    .bg-dark h3 {
+        margin: 0;
+    }
+    .text-decoration-none:hover {
+        color: #0056b3 !important;
+    }
+    .content-wrapper {
+        min-height: 400px;
+    }
+    .nav-wrapper {
+        padding: 0 20px;
+    }
+    .nav-links {
+        text-align: center;
+    }
+</style>
+{% endblock %} 

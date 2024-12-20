@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container-fluid p-0">
+    <!-- Logo Section -->
+    <div class="bg-dark text-white p-3">
+        <h3>Logo</h3>
+    </div>
+
+    <!-- Navigation Bar -->
+    <div class="nav-wrapper bg-light p-2 border-bottom">
+        <div class="d-flex justify-content-between align-items-center">
+            <div style="width: 200px;"></div>
+            <div class="nav-links">
+                <a href="{% url 'dashboard' %}" class="text-decoration-none text-dark me-5">Home</a>
+                <a href="{% url 'employee_list' %}" class="text-decoration-none text-dark">Employee List</a>
+            </div>
+            <div style="width: 200px; text-align: right;">
+                <span class="me-2">{{ request.user.username }} -</span>
+                <a href="{% url 'logout' %}" class="text-decoration-none text-danger">Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <div class="bg-warning p-2">
+        <h4 class="m-0">{% if is_edit %}Edit{% else %}Create{% endif %} Employee</h4>
+    </div>
+
+    <!-- Form Content -->
+    <div class="container mt-4">
+        <form method="post" enctype="multipart/form-data" id="employeeForm">
+            {% csrf_token %}
+            
+            <div class="mb-3">
+                <label>Name</label>
+                {{ form.name }}
+                <div class="invalid-feedback"></div>
+            </div>
+
+            <div class="mb-3">
+                <label>Email</label>
+                {{ form.email }}
+                <div class="invalid-feedback"></div>
+            </div>
+
+            <div class="mb-3">
+                <label>Mobile No</label>
+                {{ form.mobile }}
+                <div class="invalid-feedback"></div>
+            </div>
+
+            <div class="mb-3">
+                <label>Designation</label>
+                {{ form.designation }}
+            </div>
+
+            <div class="mb-3">
+                <label>Gender</label>
+                <div class="gender-options">
+                    {% for radio in form.gender %}
+                    <div class="form-check">
+                        {{ radio.tag }}
+                        <label class="form-check-label" for="{{ radio.id_for_label }}">
+                            {{ radio.choice_label }}
+                        </label>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label>Course</label>
+                {{ form.course }}
+            </div>
+
+            <div class="mb-3">
+                <label>Image Upload</label>
+                {{ form.image }}
+                <div class="invalid-feedback"></div>
+            </div>
+
+            {% if is_edit and employee.image %}
+            <div class="mb-3">
+                <label>Current Image:</label>
+                <img src="{{ employee.image.url }}" alt="{{ employee.name }}" style="width: 100px; height: 100px; object-fit: cover;">
+            </div>
+            {% endif %}
+
+            <button type="submit" class="btn btn-success">
+                {% if is_edit %}Update{% else %}Submit{% endif %}
+            </button>
+        </form>
+    </div>
+</div>
+
+<style>
+.gender-options {
+    margin-top: 10px;
+}
+.form-check {
+    margin-bottom: 10px;
+}
+.form-check-label {
+    margin-left: 10px;
+}
+</style>
+
+<script>
+document.getElementById('employeeForm').addEventListener('submit', function(e) {
+    let isValid = true;
+    
+    // Name validation
+    const name = document.getElementById('id_name');
+    if (!name.value.trim()) {
+        isValid = false;
+        name.classList.add('is-invalid');
+        name.nextElementSibling.textContent = 'Name is required';
+    }
+
+    // Email validation
+    const email = document.getElementById('id_email');
+    if (!email.value.trim()) {
+        isValid = false;
+        email.classList.add('is-invalid');
+        email.nextElementSibling.textContent = 'Email is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
+        isValid = false;
+        email.classList.add('is-invalid');
+        email.nextElementSibling.textContent = 'Invalid email format';
+    }
+
+    // Mobile validation
+    const mobile = document.getElementById('id_mobile');
+    if (!mobile.value.trim()) {
+        isValid = false;
+        mobile.classList.add('is-invalid');
+        mobile.nextElementSibling.textContent = 'Mobile number is required';
+    } else if (!/^\d{10}$/.test(mobile.value)) {
+        isValid = false;
+        mobile.classList.add('is-invalid');
+        mobile.nextElementSibling.textContent = 'Mobile number must be 10 digits';
+    }
+
+    // Image validation
+    const image = document.getElementById('id_image');
+    if (image.files.length > 0) {
+        const ext = image.files[0].name.split('.').pop().toLowerCase();
+        if (!['jpg', 'jpeg', 'png'].includes(ext)) {
+            isValid = false;
+            image.classList.add('is-invalid');
+            image.nextElementSibling.textContent = 'Only JPG and PNG files are allowed';
+        }
+    }
+
+    if (!isValid) {
+        e.preventDefault();
+    }
+});
+</script>
+{% endblock %} 
