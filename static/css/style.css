@@ -1,75 +1,40 @@
-/* Header Colors */
+/* Header colors */
 .bg-dark {
     background-color: #2c3e50 !important;  /* Dark blue header */
 }
 
-/* Navigation Colors */
-.nav-wrapper {
-    background-color: #ecf0f1 !important;  /* Light gray nav background */
-}
-
-/* Page Header Colors */
+/* Yellow header for sections */
 .bg-warning {
-    background-color: #f1c40f !important;  /* Yellow header background */
+    background-color: #f1c40f !important;  /* Bright yellow */
 }
 
-/* Links Colors */
+/* Navigation bar */
+.nav-wrapper {
+    background-color: #ecf0f1 !important;  /* Light gray */
+}
+
+/* Links */
 .text-decoration-none {
-    color: #34495e !important;  /* Dark blue text */
-}
-.text-decoration-none:hover {
-    color: #3498db !important;  /* Light blue on hover */
+    color: #2980b9 !important;  /* Blue links */
 }
 
-/* Logout Button */
-.text-danger {
-    color: #e74c3c !important;  /* Red logout text */
-}
-
-/* Form Controls */
-.form-control {
-    border-color: #bdc3c7;  /* Light gray border */
-}
-.form-control:focus {
-    border-color: #3498db;  /* Blue border on focus */
-    box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
-}
-
-/* Submit/Update Button */
+/* Buttons */
 .btn-success {
     background-color: #27ae60 !important;  /* Green button */
-    border-color: #27ae60 !important;
-}
-.btn-success:hover {
-    background-color: #219a52 !important;  /* Darker green on hover */
-    border-color: #219a52 !important;
 }
 
-/* Table Styles */
+.btn-danger {
+    background-color: #e74c3c !important;  /* Red button */
+}
+
+/* Table headers */
 .table th {
-    background-color: #f8f9fa !important;  /* Light gray header */
-}
-.table-bordered td, .table-bordered th {
-    border-color: #dee2e6;  /* Light gray borders */
+    background-color: #95a5a6 !important;  /* Gray headers */
+    color: white;
 }
 
-/* Action Links */
-.btn-info {
-    background-color: #3498db !important;  /* Blue view button */
-    border-color: #3498db !important;
-}
-
-/* Create Employee Button */
-.btn-success.create-btn {
-    background-color: #2ecc71 !important;  /* Different green for create button */
-    border-color: #2ecc71 !important;
-}
-
-/* Search Box */
-#searchInput {
-    border-color: #bdc3c7;
-}
-#searchInput:focus {
-    border-color: #3498db;
+/* Form controls */
+.form-control:focus {
+    border-color: #3498db;  /* Blue border on focus */
     box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
 } 
